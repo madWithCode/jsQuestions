@@ -37,3 +37,40 @@ test.read(() => {
 
 //================================
 
+function alter(a,b){
+	a = 10;
+	b.a = 10;
+}
+
+
+var a = 2;
+var b = {a: 2, b:3};
+
+alter(a,b);
+console.log(a);
+console.log(b.a);
+
+//==================================
+
+var obj = function(){};
+
+obj.prototype.scp = function(){
+	console.log(this === window ? "window" : "obj");
+}
+
+
+var obj1 = new obj();
+var scp = obj1.scp;
+
+obj1.scp();
+scp();
+
+//==================================
+
+Promise.resolve('res1')
+   .then(Promise.resolve('res2'))
+   .then(Promise.resolve('res3'))
+   .then(function (result){
+		console.log(result);
+});
+
