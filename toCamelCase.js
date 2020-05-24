@@ -13,8 +13,13 @@ console.log(strArry.join(''));
 
 //=================much more simpler version=======================
 
-const str = "we are in an interview";
-const newStr = str.replace(/\s[a-z]/g, function(f){
+let str = "We are in an interview";
+ str = str.replace(/\s[a-z]/g, function(f){
     return f.trim().toUpperCase();
 });
-console.log(newStr);
+
+ str = str.replace(/[A-Z]/, function(f){
+    return f.toLowerCase();
+});
+
+console.log(str);
