@@ -1,4 +1,4 @@
-const str = "we are in an interview";
+const str = "convert to camel case string";
 
 const strArry = str.split(' ');
 
