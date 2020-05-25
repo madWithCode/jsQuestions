@@ -78,7 +78,7 @@ console.log(p1.name);
 */
 
 
-///==============================================
+//==============================================
 
 let points = 100;
 let winner = false;
@@ -90,3 +90,17 @@ if(points > 99){
 console.log(winner);
 
 // what was created on chennai stays in chennai and never can be available in balgore
+
+
+//=================================================
+
+var fooBar2 = function fooBar(){
+	console.log( fooBar === fooBar);
+};
+
+fooBar2();
+/* 
+when you create a named function or anonymous (foobar) and assign it to a variable -> foobar2
+then foobar2 will have reference to the named function, hence when foobar2 is called ,
+it will execute the function reference it holds irrespective of its name
+*/
