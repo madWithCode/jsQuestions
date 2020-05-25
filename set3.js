@@ -76,3 +76,17 @@ console.log(p1.name);
 2. hence the object becomes prototype of p1
 3. delete will not delete and console prints it from prototype property
 */
+
+
+///==============================================
+
+let points = 100;
+let winner = false;
+
+if(points > 99){
+  let winner = true;
+}
+
+console.log(winner);
+
+// what was created on chennai stays in chennai and never can be available in balgore
