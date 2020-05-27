@@ -18,12 +18,16 @@ Worker.prototype.work = function(){
 
 
 function Bob(job){
-	Human.call(this, 'bob');
+	Human.call(this, 'akhilesh krishnan');
   Worker.call(this, job);
 }
 
-var blob = new Bob("IN4 at wallmart");
-
 Bob.prototype = Object.create(Human.prototype);
 
+Object.assign(Bob.prototype, Worker.prototype)
+
+var blob = new Bob("IN4 at wallmart");
+
+
 blob.talk();
+blob.work();
