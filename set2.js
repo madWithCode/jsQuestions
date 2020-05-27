@@ -79,8 +79,8 @@ Promise.resolve('res1')
 
 let promise = new Promise(function(resolve, reject) {
   resolve(1);
-
-  setTimeout(() => resolve(2), 1000);
+  resolve(2);
+  console.log('here');		
 });
 
-promise.then(alert);
+promise.then((res) => console.log(res);
