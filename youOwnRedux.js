@@ -1,52 +1,46 @@
-class createStore{
-	constructor(reducer, state = {}){
-  	this.store = state;
-    this.subscriptions = [];
-    this.reducer = reducer;
-  }
-  
-  getState(){
-  	return this.store;
-  }
-  
-  subscribe(callback){
-  	this.subscriptions.push(callback);
-  }
-  
-  dispatch(action){
-  	const newStore = this.reducer(action, this.store);
-  	if(this.store !== newStore){
-    		this.store = newStore;
-        this.subscriptions.forEach(callback => {
-        	callback(this.store);
-        })
-    }
-  }
-  
+function createStore(reducer){
+  let store = reducer(undefined, {});
+  const subscriptions = [];
+  return (function(){
+    return {
+    	getState: () => {
+      	return store;
+      },
+      dispatch: (action) => {
+      	const newState = reducer(store, action);
+        if(newState !== store){
+        	store = newState;
+        	subscriptions.forEach(callback => {
+          	callback(newState);
+          });
+        }
+      },
+      subscribe : (subscriber) => {
+      	subscriptions.push(subscriber);
+      }
+    };
+  })();
 }
 
-const reducer = (action, state) => {
+const initialState = { count : 0 };
+
+const reducer = (state = initialState, action) => {
 	switch(action.type){
   	case 'INCREMENT':
-    	return {...state, counter: state.counter+1};
-      
+    	return {...state, count: state.count+1 };
     case 'DECREMENT':
-    	return { ...state, counter: state.counter-1};
-      
+    	return {...state, count: state.count-1 };
     default:
-      return state;
-  }	
+    	return state;
+  }
 }
 
-const store = new createStore(reducer, { counter: 0});
-
-console.log(store.getState());
-
-
-store.subscribe(function(newState){
-  console.log('I am subscriber using ', newState);
+const store = createStore(reducer);
+store.subscribe(function(param){
+	console.log('state updated ',param);
 });
 
+console.log(store.getState());
 store.dispatch({type: 'INCREMENT'});
 store.dispatch({type: 'INCREMENT'});
 store.dispatch({type: 'INCREMENT'});
@@ -54,5 +48,5 @@ store.dispatch({type: 'INCREMENT'});
 console.log(store.getState());
 store.dispatch({type: 'DECREMENT'});
 store.dispatch({type: 'DECREMENT'});
-store.dispatch({type: 'Random'});
+store.dispatch({type: 'DECREMENT'});
 console.log(store.getState());
